@@ -61,6 +61,15 @@ pub async fn event_handler(
                     .await
                     .expect(format!("{}: Failed to set nickname", &username).as_str());
 
+                    // prank bugs cause she likes albert
+                    if new_message.author.id.to_string() == "936703893839155290" {
+                        new_message
+                            .reply_ping(&ctx.http, format!("Hi {}, I'm albert!", nickname))
+                            .await
+                            .expect("Could not send reply");
+                        return Ok(());
+                    }
+
                     // tell them their nickname has changed
                     new_message
                         .reply_ping(&ctx.http, format!("Hi {}, I'm bot!", nickname))
